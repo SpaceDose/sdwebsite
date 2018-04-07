@@ -12,4 +12,20 @@
  *
  */
 
-@import "bootstrap";
+ @import "bootstrap";
+
+.bg-light {
+    background-color: #D59722CC !important;
+}
+
+body {
+    background-color: #FFFBE4B3;
+}
+
+.container {
+}
+
+.stream-background {
+    margin-top: -25px;
+    background-color: black;
+}
