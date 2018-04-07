@@ -19,20 +19,38 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right:15px">
                     <ul class="navbar-nav ml-auto">
+
+                        <% if user_signed_in? %>
+                          <% if current_user.admin? %>
+                            <li class="nav-item active">
+                              <%= link_to "Users", user_list_path, class: "nav-link" %>
+                            </li>
+                          <% end %>
+                        <% end %>
+
+                        <% if user_signed_in? %>
+                          <% if current_user.accepted? %>
+                            <li class="nav-item active">
+                              <%= link_to "Media", new_image_path, class: "nav-link" %>
+                            </li>
+                          <% end %>
+                        <% end %>
+
                         <li class="nav-item active">
                             <%= link_to "Ts3Viewer", ts3Viewer_path, class: "nav-link" %>
                         </li>
-                        <li class="nav-item active" style="margin-left:15px; margin-top:1px">
-                            <% if user_signed_in? %>
-                                <%= link_to "Log Out", logout_path, class: "btn btn-light" %>
-                            <% else %>
-                                <%= link_to "Log In", login_path, class: "btn btn-light" %>
-                            <% end %>
-                        </li>
+
                     </ul>
                 </div>
+
+                <% if user_signed_in? %>
+                    <%= link_to "Log Out", logout_path, class: "btn btn-light" %>
+                <% else %>
+                    <%= link_to "Log In", login_path, class: "btn btn-light" %>
+                <% end %>
+
             </div>
         </nav>
 

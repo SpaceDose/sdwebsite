@@ -1,9 +1,17 @@
 Rails.application.routes.draw do
 
     root 'welcome#index'
+    get 'user_list', to: 'pages#users'
     get 'ts3Viewer', to:'pages#ts3Viewer'
-    devise_for :users
 
+    post 'accept' => 'pages#accept', as: :accept
+    post 'delete' => 'pages#delete', as: :delete
+    post 'make_admin' => 'pages#make_admin', as: :make_admin
+
+    resources :images, only: :create
+    get 'media', to: 'images#new', as: 'new_image'
+
+    devise_for :users
     devise_scope :user do
         root to: 'pages#ts3Viewer'
         get 'login', to: 'devise/sessions#new'

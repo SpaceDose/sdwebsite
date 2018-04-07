@@ -1,0 +1,56 @@
+<div class="container">
+  <% if current_user.admin? %>
+  <!-- Headder -->
+  <div class="row">
+    <div class="col">
+      Username
+    </div>
+    <div class="col">
+      Admin?
+    </div>
+    <div class="col">
+      Accepted?
+    </div>
+    <div class="col">
+    </div>
+  </div>
+
+      <!-- User List -->
+      <% @users = User.all %>
+      <% @users.each do |user| %>
+
+        <!-- Spacer -->
+        <div class="dropdown-divider"></div>
+
+        <div class="row">
+          <div class="col">
+            <%= user.username %>
+          </div>
+          <div class="col">
+            <%= user.admin %>
+          </div>
+          <div class="col">
+            <%= user.accepted %>
+          </div>
+          <div class="col">
+            <div class="row justify-content-between">
+              <% if !user.admin? %>
+                <%= button_to "Admin", make_admin_path, params: { id: user.id}, class: "btn btn-outline-success" %>
+              <% else %>
+                <%= button_to "Admin", make_admin_path, params: { id: user.id}, class: "btn btn-outline-danger" %>
+              <% end %>
+              <% if !user.accepted? %>
+                <%= button_to "Accept", accept_path, params: { id: user.id}, class: "btn btn-outline-success" %>
+              <% else %>
+                <%= button_to "Refuse", accept_path, params: { id: user.id}, class: "btn btn-outline-warning" %>
+              <% end %>
+              <%= button_to "Delete", delete_path, params: { id: user.id}, class: "btn btn-outline-danger" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+  <% else %>
+    You don't have the permission to see this site.
+  <% end %>
+</div>

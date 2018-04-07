@@ -1,0 +1,45 @@
+<% if user_signed_in? %>
+  <% if current_user.accepted? %>
+<div class="container">
+
+<!--
+    <%= flash[:notice] %>
+  -->
+    <span class="caret">  </span>
+    <div>
+        <%= form_for @image do |f| %>
+
+            <div class="row" style="margin-bottom:25px">
+              <div class="col">
+                <%= f.label :url %>
+              </div>
+              <div class="col-10">
+                <%= f.text_field :url, class: 'form-control' %>
+              </div>
+              <div class="col">
+                <%= f.submit 'Upload', class: 'btn btn-default' %>
+              </div>
+            </div>
+
+        <% end %>
+    </div>
+
+    <!-- Admin option to delete -->
+    <% if current_user.admin? %>
+
+    <% end %>
+
+    <% Image.all.reverse_each do |i| %>
+        <%= link_to "#{i[:url]}" do %>
+            <%= image_tag("#{i[:url]}", :class => "thumbnail") %>
+        <% end %>
+    <% end %>
+
+</div>
+
+  <% else %>
+    You are not accepted yet.
+  <% end %>
+<% else %>
+    You don't have the permission to see this site.
+<% end %>
