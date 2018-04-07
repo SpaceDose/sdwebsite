@@ -1,3 +1,9 @@
 bundle install --deployment --without development test
 bundle exec rake assets:precompile db:migrate RAILS_ENV=production
 sudo apache2ctl restart
+
+
+RAILS_ENV=production db:reset
+RAILS_ENV=production db:migrate
+
+chmod 666 db/production.sqlite3
