@@ -1,12 +1,9 @@
 <% if user_signed_in? %>
   <% if current_user.accepted? %>
-<div class="container">
+<div class="container" id="imageContainer">
 
-<!--
-    <%= flash[:notice] %>
-  -->
     <span class="caret">  </span>
-    <div>
+    <div class="">
         <%= form_for @image do |f| %>
 
             <div class="row" style="margin-bottom:25px">
@@ -24,16 +21,31 @@
         <% end %>
     </div>
 
-    <!-- Admin option to delete -->
-    <% if current_user.admin? %>
-
+<div class="container" id="images">
+  <% $img_id = 0 %>
+  <% Image.all.reverse_each do |i| %>
+    <% if params.has_key?(:id) && params[:id].to_f == i[:id].to_f %>
+      <%= link_to "/media/", :id => "image_#{i[:id]}" do %>
+        <%= image_tag("#{i[:url]}", :class => "thumbnail") %>
+      <% end %>
+    <% else %>
+      <%= link_to "/media/#{i[:id]}", :id => "image_#{i[:id]}"  do %>
+        <%= image_tag("#{i[:url]}", :class => "thumbnail") %>
+      <% end %>
     <% end %>
 
-    <% Image.all.reverse_each do |i| %>
-        <%= link_to "#{i[:url]}" do %>
-            <%= image_tag("#{i[:url]}", :class => "thumbnail") %>
-        <% end %>
+    <% if params.has_key?(:id) %>
+      <% if params[:id].to_f == i[:id].to_f %>
+        <div class="row justify-content-center" id="view_panel" style="margin:2px 0 5px 0">
+            <%= image_tag("#{Image.find(params[:id])[:url]}") %>
+        </div>
+      <% end %>
     <% end %>
+
+    <% $img_id = $img_id + 1 %>
+  <% end %>
+
+</div>
 
 </div>
 
@@ -43,3 +55,133 @@
 <% else %>
     You don't have the permission to see this site.
 <% end %>
+
+<script>
+
+window.onload = function () {
+  pause_gifs();
+}
+
+window.addEventListener("resize", onresize);
+
+var image_width = 124;
+
+var width = document.getElementById("images").offsetWidth;
+var rows = Math.ceil(gon.image_count / (width / image_width) + 2);
+var images_per_row = Math.floor(width / image_width);
+//document.getElementById('test1').innerHTML = rows;
+//document.getElementById('test2').innerHTML = images_per_row;
+render_rows(rows);
+fill_rows(images_per_row, rows);
+
+var onresize = function() {
+
+  var width = document.getElementById("images").offsetWidth;
+  var rows = Math.ceil(gon.image_count / (width / image_width) + 2);
+  var images_per_row = Math.floor(width / image_width);
+
+  if (rows != gon.image_count / (width / image_width)) {
+
+    render_rows(rows);
+    fill_rows(images_per_row, rows);
+    set_size_view_panel(width);
+    pause_gifs();
+  }
+}
+
+function render_rows(a) {
+  for (var i = 0; i < a; i++) {
+    if (!document.getElementById("row_" + i)) {
+      document.getElementById('images').innerHTML += "<div class='row' id='row_" + i + "'></row>";
+    }
+  }
+  if (!document.getElementById("view_panel")) {
+    document.getElementById('images').innerHTML += "<div class='row justify-content-center' id='view_panel' style='margin:2px 0 5px 0'></row>";
+  }
+}
+
+function fill_rows(a, b) {
+
+  var act_row = 0;
+  var count = 0;
+
+  for (var i = gon.last_img_id; i >= 0 ; i--) {
+
+    if (document.getElementById("image_" + i)) {
+      count++;
+      var img = document.getElementById("image_" + i);
+      document.getElementById("row_" + act_row).appendChild(img);
+
+      img.onclick = repos_view_panel(img, b);
+    }
+    if (a == count) {
+      act_row++;
+      count = 0;
+    }
+  }
+}
+
+function repos_view_panel(a, b) {
+
+  var container = document.getElementById('images');
+
+  var url_index = window.location.href.split('/');
+  url_index = url_index.pop() || url_index.pop();
+
+  if (url_index != "media") {
+
+    row_index = document.getElementById("image_" + url_index).parentElement.id;
+    row_index = row_index.substring(4);
+
+    for (var i = 0; i < b; i++) {
+
+      var curr_row = document.getElementById("row_" + i);
+      container.appendChild(curr_row);
+
+      if (i == row_index) {
+        container.appendChild(document.getElementById('view_panel'));
+      }
+    }
+  }
+    set_size_view_panel (width);
+    pause_gifs();
+}
+
+function set_size_view_panel (width) {
+  if (document.getElementById('view_panel').children[0]) {
+    var img = document.getElementById('view_panel').children[0];
+
+    if (img.naturalWidth > width) {
+      img.style.width = width + "px";
+      img.style.height = "100%";
+    }
+  }
+}
+
+function pause_gifs () {
+
+ for (var i = gon.last_img_id; i >= 0 ; i--) {
+
+    if (document.getElementById("image_" + i)) {
+
+      var src_string = document.getElementById("image_" + i).children[0].src;
+
+      if (src_string != null && src_string.includes(".gif")) {
+        if (document.getElementById("image_" + i).children[1]) {
+          document.getElementById("image_" + i).children[1].remove();
+        }
+
+        document.getElementById("image_" + i).innerHTML += "<canvas class='thumbnail' id='canvas_"+ i +"'></canvas>";
+        var canvas = document.getElementById("canvas_" + i);
+        var ctx = canvas.getContext("2d");
+        var img = document.getElementById("image_" + i).children[0];
+        ctx.drawImage(img,0,0);
+
+        document.getElementById("image_" + i).appendChild(canvas);
+        document.getElementById("image_" + i).children[0].style = "display:none";
+      }
+    }
+  }
+}
+
+</script>

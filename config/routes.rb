@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
     resources :images, only: :create
     get 'media', to: 'images#new', as: 'new_image'
+    get '/media/:id', to: 'images#new', as: 'new_image_id'
+    #match 'media/:item_id' => 'images#new', as: 'new_image'
 
     devise_for :users
     devise_scope :user do
