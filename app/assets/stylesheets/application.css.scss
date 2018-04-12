@@ -78,3 +78,18 @@ body {
 #images {
   min-width: 496px;
 }
+
+h1, h2, h3, h4, h5, h6, p {
+  color: #D59722;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+p {
+  font-size: 18px;
+}
+
+.custom-button {
+  &:hover {
+	    box-shadow: 0 0 4px 2px rgba(255, 200, 0, 0.9);
+	}
+}

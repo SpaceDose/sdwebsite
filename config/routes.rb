@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
     root 'welcome#index'
     get 'user_list', to: 'pages#users'
+    get 'convention', to: 'pages#convention'
     get 'ts3Viewer', to:'pages#ts3Viewer'
+    get 'faq', to:'pages#faq'
 
     post 'accept' => 'pages#accept', as: :accept
     post 'delete' => 'pages#delete', as: :delete

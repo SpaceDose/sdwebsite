@@ -1,6 +1,7 @@
 bundle install --deployment --without development test
 bundle exec rake assets:precompile db:migrate RAILS_ENV=production
 sudo apache2ctl restart
+config.secret_key = '8d381a91a491152538381682912f12118cef92d87eb325b350ec5b74a4fac31c2686b168bbb5096d8912ed8cf758a11c59206d0c36ed18b5b830e8ba1dc12686'
 
 
 RAILS_ENV=production db:reset

@@ -32,10 +32,14 @@
                           <% end %>
                         <% end %>
 
+                          <li class="nav-item active">
+                            <%= link_to "UserConv2k18", convention_path, class: "nav-link" %>
+                          </li>
+
                         <% if user_signed_in? %>
                           <% if current_user.accepted? %>
                             <li class="nav-item active">
-                              <%= link_to "Media", new_image_path, class: "nav-link" %>
+                              <%= link_to "Media", new_image_path, class: "nav-link", :data => {:confirm => 'This page is lagging as FAQ. maybe crashing your browser'} %>
                             </li>
                           <% end %>
                         <% end %>
@@ -43,6 +47,14 @@
                         <li class="nav-item active">
                             <%= link_to "Ts3Viewer", ts3Viewer_path, class: "nav-link" %>
                         </li>
+
+                        <% if user_signed_in? %>
+                          <% if current_user.accepted? %>
+                            <li class="nav-item active">
+                              <%= link_to "FAQ", faq_path, class: "nav-link" %>
+                            </li>
+                          <% end %>
+                        <% end %>
 
                     </ul>
                 </div>
