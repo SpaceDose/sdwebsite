@@ -1,3 +1,4 @@
+
 <div class="container">
   <% if current_user.admin? %>
   <!-- Headder -->
@@ -6,17 +7,24 @@
       Username
     </div>
     <div class="col">
+      TS Username
+    </div>
+    <div class="col">
+      Points
+    </div>
+    <div class="col">
       Admin?
     </div>
     <div class="col">
       Accepted?
     </div>
-    <div class="col">
+    <div class="col-3">
     </div>
   </div>
 
       <!-- User List -->
       <% @users = User.all %>
+        <% @count = 0 %>
       <% @users.each do |user| %>
 
         <!-- Spacer -->
@@ -27,12 +35,18 @@
             <%= user.username %>
           </div>
           <div class="col">
-            <%= user.admin %>
+              <%= user.tsusername %>
+          </div>
+          <div class="col">
+              <%= user.points %>
+          </div>
+          <div class="col">
+              <%= user.admin %>
           </div>
           <div class="col">
             <%= user.accepted %>
           </div>
-          <div class="col">
+          <div class="col-3">
             <div class="row justify-content-between">
               <% if !user.admin? %>
                 <%= button_to "Admin", make_admin_path, params: { id: user.id}, class: "btn btn-outline-success" %>
@@ -48,9 +62,19 @@
             </div>
           </div>
         </div>
+        <% @count = @count + 1 %>
       <% end %>
 
   <% else %>
     You don't have the permission to see this site.
   <% end %>
 </div>
+<!-- Update Userpoints
+<script type="text/javascript">
+alert 'All images are loaded'
+      for (var count = 0; count < gon.users_count; count++) {
+        document.getElementById("username_" + count).innerHTML = "test" + count;
+        document.getElementById("points_" + count).innerHTML = "test";
+      }
+</script>
+-->

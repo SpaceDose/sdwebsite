@@ -1,6 +1,11 @@
 class PagesController < ApplicationController
 
   def users
+    @users_count = User.count
+    gon.watch.users_count = @users_count
+  end
+
+  def profile
   end
 
   def ts3Viewer

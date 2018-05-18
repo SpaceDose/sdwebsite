@@ -7,6 +7,7 @@
 
         <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
         <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= tag :meta, name: :psj, action: action_name, controller: controller_name %>
         <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     </head>
 
@@ -21,8 +22,16 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right:15px">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right:-20px">
                     <ul class="navbar-nav ml-auto">
+
+                      <% if user_signed_in? %>
+                        <% if current_user.accepted? %>
+                          <li class="nav-item active">
+                            <%= link_to current_user.username, profile_path, class: "nav-link" %>
+                          </li>
+                        <% end %>
+                      <% end %>
 
                         <% if user_signed_in? %>
                           <% if current_user.admin? %>
@@ -56,14 +65,15 @@
                           <% end %>
                         <% end %>
 
+                        <% if user_signed_in? %>
+                            <%= link_to "Log Out", logout_path, class: "btn btn-logout", style: "margin-left: 15px" %>
+                        <% else %>
+                            <%= link_to "Log In", login_path, class: "btn btn-login", style: "margin-left: 15px" %>
+                        <% end %>
                     </ul>
                 </div>
 
-                <% if user_signed_in? %>
-                    <%= link_to "Log Out", logout_path, class: "btn btn-logout" %>
-                <% else %>
-                    <%= link_to "Log In", login_path, class: "btn btn-login" %>
-                <% end %>
+
 
             </div>
         </nav>

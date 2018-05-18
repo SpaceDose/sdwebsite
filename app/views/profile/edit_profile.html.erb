@@ -1,0 +1,49 @@
+<div class="container">
+
+  <h1>Edit your profile (<%= current_user.username %>):</h1>
+  <br><br>
+
+  <!-- Spacer -->
+  <div class="dropdown-divider"></div>
+
+<!-- NICKNAME -->
+
+    <%= form_tag("/save_nickname", method: "save_nickname", class: "row justify-content-between") do %>
+      <div class="col">
+        <h4>
+          <%= label_tag(:nickname, "Change Nickname:") %>
+        </h4>
+      </div>
+      <div class="col">
+        <%= text_field_tag :nickname, nil, class: 'form-control'%>
+      </div>
+      <div class="col">
+        <div class="row justify-content-center">
+          <%= submit_tag("Save", class: "btn btn-primary", style: "margin-right: 10px") %>
+          <%= link_to "Cancel", profile_path, class: "btn btn-secondary" %>
+        </div>
+      </div>
+    <% end %>
+
+
+<!-- UNIQUE ID -->
+
+  <%= form_tag("/save_uniqueid", method: "save_uniqueid", class: "row justify-content-between") do %>
+    <div class="col">
+      <h4>
+        <%= label_tag(:uniqueid, "Change TS ident:") %>
+      </h4>
+    </div>
+    <div class="col">
+      <%= text_field_tag :uniqueid, nil, class: 'form-control'%>
+    </div>
+    <div class="col">
+      <div class="row justify-content-center">
+        <%= submit_tag("Save", class: "btn btn-primary", style: "margin-right: 10px") %>
+        <%= link_to "Cancel", profile_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  <% end %>
+
+
+</div>

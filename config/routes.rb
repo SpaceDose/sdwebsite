@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
     root 'welcome#index'
+
     get 'user_list', to: 'pages#users'
     get 'convention', to: 'pages#convention'
     get 'ts3Viewer', to:'pages#ts3Viewer'
@@ -9,6 +10,11 @@ Rails.application.routes.draw do
     post 'accept' => 'pages#accept', as: :accept
     post 'delete' => 'pages#delete', as: :delete
     post 'make_admin' => 'pages#make_admin', as: :make_admin
+
+    get 'profile', to:'profile#profile'
+    get 'edit_profile', to:'profile#edit_profile'
+    post 'save_nickname' => 'profile#save_nickname', as: :save_nickname
+    post 'save_uniqueid' => 'profile#save_uniqueid', as: :save_uniqueid
 
     resources :images, only: :create
     get 'media', to: 'images#new', as: 'new_image'
