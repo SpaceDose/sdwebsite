@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uniqueid: MyString
+  tsusername: MyString
+  points: 1
+
+two:
+  uniqueid: MyString
+  tsusername: MyString
+  points: 1

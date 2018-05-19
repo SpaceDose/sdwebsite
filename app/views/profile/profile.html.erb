@@ -8,7 +8,7 @@
             <h3>Nickname</h3>
           </div>
           <div class="col-4">
-            <h3>Ts Identification</h3>
+            <h3>Ts Identity</h3>
           </div>
           <div class="col">
             <h3>Points</h3>
@@ -29,10 +29,25 @@
             <p><%= current_user.uniqueid %></p>
           </div>
           <div class="col align-self-end">
-            <p><%= current_user.points %></p>
+            <p>
+              <% @usr = Point.find_by uniqueid: current_user.uniqueid %>
+              <% if @usr %>
+                <%= @usr.points %>
+              <% else %>
+                WRONG IDENTITY
+              <% end %>
+            </p>
           </div>
           <div class="col">
             <%= link_to "Edit", edit_profile_path, class: "btn btn-outline-warning" %>
           </div>
         </div>
+
+        <div style="margin-top: 100px">
+          <h2>How to find your TeamSpeak Identity?</h2>
+          <br>
+          <p>To see your points, its required that you add your TeamSpeak Unique ID to your profile.</p>
+          <p>You can find your Ts³ Identity (Unique ID) by pressing CTRL+I in your Ts³ Client and clicking on "Go advanced"</p>
+        </div>
+
 </div>

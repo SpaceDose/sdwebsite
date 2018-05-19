@@ -2,7 +2,6 @@ class ProfileController < ApplicationController
 protect_from_forgery
 
   def profile
-
   end
 
   def edit_profile
