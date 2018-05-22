@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container" style="margin-bottom: 150px">
   <% if current_user.admin? %>
   <!-- Headder -->
   <div class="row">
@@ -7,10 +7,10 @@
       Username
     </div>
     <div class="col">
-      TS Username
+      Nickname
     </div>
     <div class="col">
-      Points
+      POI
     </div>
     <div class="col">
       Admin?
@@ -35,11 +35,7 @@
             <%= user.username %>
           </div>
           <div class="col">
-              <% if @usr %>
-                <%= @usr.tsusername %>
-              <% else %>
-                N/A
-              <% end %>
+              <%= user.tsusername %>
           </div>
           <div class="col">
             <% if @usr %>
@@ -49,17 +45,27 @@
             <% end %>
           </div>
           <div class="col">
-              <%= user.admin %>
+            <% if user.admin %>
+              <p style="color: green">✔</p>
+            <% else %>
+              <p style="color: red">✘
+            <% end %>
           </div>
           <div class="col">
-            <%= user.accepted %>
+            <% if user.accepted %>
+              <p style="color: green">✔</p>
+            <% else %>
+              <p style="color: red">✘</p>
+            <% end %>
           </div>
           <div class="col-3">
-            <div class="row justify-content-between">
-              <% if !user.admin? %>
-                <%= button_to "Admin", make_admin_path, params: { id: user.id}, class: "btn btn-outline-success" %>
-              <% else %>
-                <%= button_to "Admin", make_admin_path, params: { id: user.id}, class: "btn btn-outline-danger" %>
+            <div class="row justify-content-around">
+              <% if current_user.uniqueid == "ft4sdAVw6mmRY+P/kgLzvsdeWIY=" %>
+                <% if !user.admin? %>
+                  <%= button_to "Admin", make_admin_path, params: { id: user.id}, class: "btn btn-outline-success" %>
+                <% else %>
+                  <%= button_to "Admin", make_admin_path, params: { id: user.id}, class: "btn btn-outline-danger" %>
+                <% end %>
               <% end %>
               <% if !user.accepted? %>
                 <%= button_to "Accept", accept_path, params: { id: user.id}, class: "btn btn-outline-success" %>
@@ -77,12 +83,3 @@
     You don't have the permission to see this site.
   <% end %>
 </div>
-<!-- Update Userpoints
-<script type="text/javascript">
-alert 'All images are loaded'
-      for (var count = 0; count < gon.users_count; count++) {
-        document.getElementById("username_" + count).innerHTML = "test" + count;
-        document.getElementById("points_" + count).innerHTML = "test";
-      }
-</script>
--->

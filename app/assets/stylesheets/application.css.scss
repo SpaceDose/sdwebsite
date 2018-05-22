@@ -14,12 +14,23 @@
 
  @import "bootstrap";
 
+:root {
+  // ORANGE
+  //--light-bg-color: #FFFBE4B3;
+  //--bg-color:  #D59722CC;
+
+  --light-bg-color: #DEFFD8AA;
+  --bg-color:  #397F2D;
+  --btn-color: #2B6122;
+
+}
+
 .bg-light {
-    background-color: #D59722CC !important;
+    background-color: var(--bg-color) !important;
 }
 
 body {
-    background-color: #FFFBE4B3;
+    background-color: var(--light-bg-color);
 }
 
 .navbar-light .navbar-brand {
@@ -43,11 +54,11 @@ body {
 
 .btn-logout, .btn-login {
   color: white;
-  background-color: #D59722CC;
+  background-color: var(--btn-color);
   border-radius: 0rem;
 
   &:hover {
-    color: #D59722CC;
+    color: var(--bg-color);
     background-color: white;
   }
 }
@@ -71,7 +82,7 @@ body {
 	object-fit: cover;
 
 	&:hover {
-	    box-shadow: 0 0 4px 2px rgba(255, 200, 0, 0.9);
+	    box-shadow: 0 0 4px 2px var(--bg-color);
 	}
 }
 
@@ -79,9 +90,18 @@ body {
   min-width: 496px;
 }
 
-h1, h2, h3, h4, h5, h6, p {
-  color: #D59722;
+h1, h2, h3, h4, h5, h6, p, a.nav-link {
+  color: var(--bg-color);
   font-family: 'Fjalla One', sans-serif;
+}
+
+a.nav-link {
+  font-size: 120%;
+}
+
+a.btn {
+  font-family: 'Fjalla One', sans-serif;
+  //font-size: 120%;
 }
 
 p {
@@ -90,6 +110,6 @@ p {
 
 .custom-button {
   &:hover {
-	    box-shadow: 0 0 4px 2px rgba(255, 200, 0, 0.9);
+	    box-shadow: 0 0 4px 2px var(--bg-color);
 	}
 }
