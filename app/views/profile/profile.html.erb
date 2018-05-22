@@ -43,13 +43,18 @@
           </div>
         </div>
 
-        <div style="margin-top: 100px">
-          <h1>Please link your Unique ID in your profile</h1>
-          <br><br>
-          <h2>How to find your TeamSpeak Identity?</h2>
-          <br>
-          <p>To see your points, its required that you add your TeamSpeak Unique ID to your profile.</p>
-          <p>You can find your Ts³ Identity (Unique ID) by pressing CTRL+I in your Ts³ Client and clicking on "Go advanced"</p>
-        </div>
+        <% if current_user.uniqueid == nil %>
+          <div style="margin-top: 100px">
+            <h1>Please link your Unique ID in your profile and set a nickname</h1>
+            <br><br>
+            <h2>How to find your TeamSpeak Identity?</h2>
+            <br>
+            <p>To see your points, its required that you add your TeamSpeak Unique ID to your profile.</p>
+            <p>You can find your Ts³ Identity (Unique ID) by pressing CTRL+I in your Ts³ Client and clicking on "Go advanced"</p>
+            <br>
+            <h1>To be shown in the ranking list, you have to set your nickname on the Website.</h1>
+            <p></p>
+          </div>
+        <% end %>
 
 </div>
