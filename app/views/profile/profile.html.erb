@@ -23,10 +23,18 @@
 
         <div class="row">
           <div class="col">
-            <p><%= current_user.tsusername %></p>
+            <% if current_user.tsusername != nil && current_user.tsusername.length > 9 %>
+              <p><%= current_user.tsusername[0..9] %>...</p>
+            <% else %>
+              <p><%= current_user.tsusername %></p>
+            <% end %>
           </div>
           <div class="col-4">
-            <p><%= current_user.uniqueid %></p>
+            <% if current_user.uniqueid != nil && current_user.uniqueid.length > 15 %>
+              <p><%= current_user.uniqueid[0..15] %>...</p>
+            <% else %>
+              <p><%= current_user.uniqueid %></p>
+            <% end %>
           </div>
           <div class="col align-self-end">
             <p>
@@ -43,7 +51,7 @@
           </div>
         </div>
 
-        <% if current_user.uniqueid == nil %>
+        <% if current_user.uniqueid == nil || current_user.uniqueid == "" || current_user.tsusername == nil || current_user.tsusername == "" %>
           <div style="margin-top: 100px">
             <h1>Please link your Unique ID in your profile and set a nickname</h1>
             <br><br>

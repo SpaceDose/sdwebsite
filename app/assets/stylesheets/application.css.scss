@@ -19,10 +19,28 @@
   //--light-bg-color: #FFFBE4B3;
   //--bg-color:  #D59722CC;
 
-  --light-bg-color: #DEFFD8AA;
-  --bg-color:  #397F2D;
-  --btn-color: #2B6122;
+  // GREEN
+  //--light-bg-color: #DEFFD8AA;
+  //--bg-color:  #397F2D;
+  //--btn-color: #2B6122;
 
+  // who needs colours
+  --light-bg-color: #313A35;  // BODY
+  --bg-color:  #C93B21;// NAVBAR
+  --btn-color: #C49662;
+  --font-color: #E6D9C9;
+
+
+}
+
+.btn-outline-danger {
+  color: var(--bg-color);
+  border-color: var(--bg-color);
+
+  &:hover {
+    background-color: var(--bg-color);
+      border-color: var(--bg-color);
+  }
 }
 
 .bg-light {
@@ -31,6 +49,16 @@
 
 body {
     background-color: var(--light-bg-color);
+
+}
+
+.navbar {
+
+}
+
+.stream-background {
+    margin-top: -25px;
+    background-color: black;
 }
 
 .navbar-light .navbar-brand {
@@ -48,7 +76,7 @@ body {
   color: white;
 
   &:hover {
-    color: black;
+    color: #E6D9C9;
   }
 }
 
@@ -61,11 +89,6 @@ body {
     color: var(--bg-color);
     background-color: white;
   }
-}
-
-.stream-background {
-    margin-top: -25px;
-    background-color: black;
 }
 
 // Media
@@ -91,7 +114,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, p, a.nav-link {
-  color: var(--bg-color);
+  color: var(--font-color);
   font-family: 'Fjalla One', sans-serif;
 }
 

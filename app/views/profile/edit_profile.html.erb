@@ -16,7 +16,7 @@
         </h4>
       </div>
       <div class="col">
-        <%= text_field_tag :nickname, nil, class: 'form-control'%>
+        <%= text_field_tag :nickname, current_user.tsusername, class: 'form-control'%>
       </div>
       <div class="col">
         <div class="row justify-content-center">
@@ -37,7 +37,7 @@
       </h4>
     </div>
     <div class="col">
-      <%= text_field_tag :uniqueid, nil, class: 'form-control'%>
+      <%= text_field_tag :uniqueid, current_user.uniqueid, class: 'form-control'%>
     </div>
     <div class="col">
       <div class="row justify-content-center">

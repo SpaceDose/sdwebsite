@@ -4,19 +4,19 @@
   <!-- Headder -->
   <div class="row">
     <div class="col">
-      Username
+      <p>Username</p>
     </div>
     <div class="col">
-      Nickname
+      <p>Nickname</p>
     </div>
     <div class="col">
-      POI
+      <p>POI</p>
     </div>
     <div class="col">
-      Admin?
+      <p>Admin?</p>
     </div>
     <div class="col">
-      Accepted?
+      <p>Accepted?</p>
     </div>
     <div class="col-3">
     </div>
@@ -32,30 +32,34 @@
 
         <div class="row">
           <div class="col">
-            <%= user.username %>
+            <p><%= user.username %></p>
           </div>
           <div class="col">
-              <%= user.tsusername %>
+              <% if user.tsusername != nil && user.tsusername.length > 9 %>
+                <p><%= user.tsusername[0..9] %>...</p>
+              <% else %>
+                <p><%= user.tsusername %></p>
+              <% end %>
           </div>
           <div class="col">
             <% if @usr %>
-              <%= @usr.points %>
+              <p><%= @usr.points %></p>
             <% else %>
-              N/A
+              <p>N/A</p>
             <% end %>
           </div>
           <div class="col">
             <% if user.admin %>
-              <p style="color: green">✔</p>
+              <p style="color: green; margin-left: 18px">✔</p>
             <% else %>
-              <p style="color: red">✘
+              <p style="color: #C93B21; margin-left: 18px">✘</p>
             <% end %>
           </div>
           <div class="col">
             <% if user.accepted %>
-              <p style="color: green">✔</p>
+              <p style="color: green; margin-left: 25px">✔</p>
             <% else %>
-              <p style="color: red">✘</p>
+              <p style="color: #C93B21; margin-left: 25px">✘</p>
             <% end %>
           </div>
           <div class="col-3">
@@ -68,11 +72,13 @@
                 <% end %>
               <% end %>
               <% if !user.accepted? %>
-                <%= button_to "Accept", accept_path, params: { id: user.id}, class: "btn btn-outline-success" %>
+                  <%= button_to "Accept", accept_path, params: { id: user.id}, class: "btn btn-outline-success" %>
               <% else %>
-                <%= button_to "Refuse", accept_path, params: { id: user.id}, class: "btn btn-outline-warning" %>
+                  <%= button_to "Refuse", accept_path, params: { id: user.id}, class: "btn btn-outline-warning" %>
               <% end %>
-              <%= button_to "Delete", delete_path, params: { id: user.id}, class: "btn btn-outline-danger" %>
+              <% if current_user.uniqueid == "ft4sdAVw6mmRY+P/kgLzvsdeWIY=" %>
+                <%= button_to "Delete", delete_path, params: { id: user.id}, class: "btn btn-outline-danger" %>
+              <% end %>
             </div>
           </div>
         </div>
