@@ -27,13 +27,14 @@
   // who needs colours
   --light-bg-color: #313A35;  // BODY
   --bg-color:  #C93B21;// NAVBAR
+  --bg-color-dark: #992D19;
   --btn-color: #C49662;
   --font-color: #E6D9C9;
 
 
 }
 
-.btn-outline-danger {
+.btn-outline-danger, {
   color: var(--bg-color);
   border-color: var(--bg-color);
 
@@ -43,12 +44,22 @@
   }
 }
 
+.btn-danger {
+  background-color: var(--bg-color);
+
+  &:hover {
+    background-color: var(--bg-color-dark);
+      border-color: var(--bg-color-dark);
+  }
+}
+
 .bg-light {
     background-color: var(--bg-color) !important;
 }
 
 body {
     background-color: var(--light-bg-color);
+    margin-bottom: 200px;
 
 }
 

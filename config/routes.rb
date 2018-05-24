@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     root 'welcome#index'
 
     get 'user_list', to: 'pages#users'
+    get 'rankings', to: 'pages#rankings'
     get 'convention', to: 'pages#convention'
     get 'ts3Viewer', to:'pages#ts3Viewer'
     get 'faq', to:'pages#faq'
@@ -13,6 +14,8 @@ Rails.application.routes.draw do
 
     get 'profile', to:'profile#profile'
     get 'edit_profile', to:'profile#edit_profile'
+    post 'show_yourself' => 'profile#show_yourself', as: :show_yourself
+    post 'hide_yourself' => 'profile#hide_yourself', as: :hide_yourself
     post 'save_nickname' => 'profile#save_nickname', as: :save_nickname
     post 'save_uniqueid' => 'profile#save_uniqueid', as: :save_uniqueid
 

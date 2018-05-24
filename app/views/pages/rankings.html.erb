@@ -1,0 +1,58 @@
+
+<div class="container">
+
+<% if current_user.tsusername == nil %>
+<h2> Cannot find yourself? Set a Nickname in your profile!</h2><br>
+<% end %>
+
+<h1>User Rankings:</h1><br>
+  <!-- Headder -->
+  <div class="row">
+    <div class="col">
+      <p>Rank</p>
+    </div>
+    <div class="col">
+      <p>User</p>
+    </div>
+    <div class="col">
+      <p>POI</p>
+    </div>
+  </div>
+  <!-- Spacer -->
+  <div class="dropdown-divider"></div>
+
+      <!-- User List -->
+      <% @users = User.joins("INNER JOIN points ON users.uniqueid=points.uniqueid").select("users.tsusername, points.points, users.hide").order("points.points DESC") %>
+      <% @count = 0 %>
+      <% @users.each do |user| %>
+        <% if user.tsusername != nil && user.hide == 0 %>
+
+        <div class="row">
+          <div class="col">
+            <% if @count != 0 %>
+              <p><%= @count %></p>
+            <% end %>
+          </div>
+          <div class="col">
+              <% if user.tsusername.length > 9 %>
+                <p><%= user.tsusername[0..9] %>...</p>
+              <% else %>
+                <p><%= user.tsusername %></p>
+              <% end %>
+          </div>
+          <div class="col">
+              <p><%= user.points %></p>
+          </div>
+        </div>
+        <% @count += 1 %>
+
+        <!-- Spacer -->
+        <div class="dropdown-divider"></div>
+        <% end %>
+
+      <% end %>
+
+      <% if current_user.hide != 0 %>
+      <h2 style="margin-top:50px"> You are currently hidden! To show yourself, go to your profile.</h2><br>
+      <% end %>
+</div>

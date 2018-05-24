@@ -41,6 +41,12 @@
                           <% end %>
                         <% end %>
 
+                        <% if user_signed_in? %>
+                            <li class="nav-item active">
+                              <%= link_to "Rankings", rankings_path, class: "nav-link" %>
+                            </li>
+                        <% end %>
+
                           <li class="nav-item active">
                             <%= link_to "UserConv2k18", convention_path, class: "nav-link" %>
                           </li>
@@ -77,6 +83,10 @@
 
             </div>
         </nav>
+
+        <% flash.each do |key, value| %>
+          <div class="container alert alert-<%= key %>"><%= value %></div>
+        <% end %>
 
         <!-- actual body -->
         <%= yield %>

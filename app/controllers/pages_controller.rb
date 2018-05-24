@@ -14,6 +14,11 @@ class PagesController < ApplicationController
   def media
   end
 
+  def rankings
+    @users_count = User.count
+    gon.watch.users_count = @users_count
+  end
+
   def accept
     id = params[:id]
     u = User.find(id)
