@@ -38,7 +38,7 @@
             <% end %>
           </div>
 
-          <div class="col align-self-end">
+          <div class="col">
             <p>
               <% @usr = Point.find_by uniqueid: current_user.uniqueid %>
               <% if @usr %>
@@ -73,14 +73,15 @@
         <div style="margin-top: 30px">
           <!-- Spacer -->
           <div class="dropdown-divider" style="margin-bottom: 30px"></div>
-          <h3>You are currently NOT visible in the ranking list!<h1/>
-          <div class="col">
-            <% if current_user.hide == 0 %>
-              <%= button_to "Hide yourself in rankings", hide_yourself_path, class: "btn btn-danger " %>
-            <% else %>
-              <%= button_to "Show yourself", show_yourself_path, class: "btn btn-success" %>
-            <% end %>
-          </div>
+
+          <% if current_user.hide == 0 %>
+            <h3>You are currently visible in the ranking list!<h1/>
+            <%= button_to "Hide yourself in rankings", hide_yourself_path, class: "btn btn-danger " %>
+          <% else %>
+            <h3>You are currently NOT visible in the ranking list!<h1/>
+            <%= button_to "Show yourself", show_yourself_path, class: "btn btn-success" %>
+          <% end %>
+
         </div>
 
 </div>
