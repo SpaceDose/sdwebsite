@@ -41,6 +41,14 @@
                           <% end %>
                         <% end %>
 
+                        <% if user_signed_in? %>
+                          <% if current_user.accepted? %>
+                            <li class="nav-item active">
+                              <%= link_to "Shop", shop_path, class: "nav-link" %>
+                            </li>
+                          <% end %>
+                        <% end %>
+
                           <li class="nav-item active">
                             <%= link_to "UserConv2k18", convention_path, class: "nav-link" %>
                           </li>

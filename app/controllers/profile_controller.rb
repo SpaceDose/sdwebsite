@@ -7,9 +7,6 @@ protect_from_forgery
   def edit_profile
   end
 
-  def inventory
-  end
-
   def show_yourself
     current_user.hide = 0
     current_user.save

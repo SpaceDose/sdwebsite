@@ -1,0 +1,27 @@
+// Place all the styles related to the Shop controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.inventory {
+  margin: 50px;
+}
+
+.item-button {
+  background-color: Transparent;
+  border: 1px solid;
+  border-color: var(--font-color);
+}
+
+.item-image {
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+}
+
+.item-title {
+  margin-bottom: 0px;
+}
+
+.modal-content {
+  background-color: var(--light-bg-color);
+}

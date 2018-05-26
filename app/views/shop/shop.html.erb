@@ -1,0 +1,46 @@
+<div class="container">
+  <h1>Shop:</h1>
+
+  <div class="inventory row text-center text-lg-left">
+
+      <% @items = ShopItem.all %>
+      <% @items.each do |item| %>
+
+        <button class="item-button col-lg-2 col-md-4 col-xs-6" type="button" data-toggle="modal" data-target="#<%= item.item %>Modal">
+          <img class="item-image" src="/images/<%= item.picturename %>" />
+          <p class="item-title"><%= item.item %></p>
+          <p>Costs: <%= item.costs %> POI</p>
+        </button>
+
+        <!-- MODAL for <%= item.item %> -->
+        <div class="modal fade" id="<%= item.item %>Modal" tabindex="-1" role="dialog" aria-labelledby="<%= item.item %>ModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="<%= item.item %>ModalLabel">Description</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <% if item.maximum == 0 %>
+                  <p>Maximum quantity for each User: infinite</p>
+                <% else %>
+                  <p>Maximum quantity for each User: <%= item.maximum %></p>
+                <% end %>
+                <p><%= item.description %></p>
+                <br><p>Do you want to spend <b style="color:var(--bg-color)"><%= item.costs %></b> POI on <b style="color:var(--bg-color)"><%= item.item %></b> ?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nah..</button>
+                <%= link_to "Gimme that!", buy_path(@post, :item => item.item, :cost => item.costs, :maximum => item.maximum), class: "btn btn-primary", method: :post %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+
+  </div>
+
+</div>
