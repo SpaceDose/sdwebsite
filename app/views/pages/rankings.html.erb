@@ -23,25 +23,55 @@
 
       <!-- User List -->
       <% @users = User.joins("INNER JOIN points ON users.uniqueid=points.uniqueid").select("users.tsusername, points.points, users.hide").order("points.points DESC") %>
-      <% @count = 0 %>
+      <% @count = 1 %>
       <% @users.each do |user| %>
         <% if user.tsusername != nil && user.hide == 0 %>
 
         <div class="row">
           <div class="col">
-            <% if @count != 0 %>
+            <% if @count == 1 %>
+              <h3><%= @count %></h3>
+            <% elsif @count == 2 %>
+              <h4><%= @count %></h4>
+            <% elsif @count == 3 %>
+              <h5><%= @count %></h5>
+            <% else %>
               <p><%= @count %></p>
             <% end %>
           </div>
           <div class="col">
-              <% if user.tsusername.length > 9 %>
-                <p><%= user.tsusername[0..9] %>...</p>
+              <% if user.tsusername.length > 15 %>
+                <% if @count == 1 %>
+                    <h3><%= user.tsusername[0..15] %>...</h3>
+                  <% elsif @count == 2 %>
+                    <h4><%= user.tsusername[0..15] %>...</h4>
+                  <% elsif @count == 3 %>
+                    <h5><%= user.tsusername[0..15] %>...</h5>
+                  <% else %>
+                    <p><%= user.tsusername[0..15] %>...</p>
+                <% end %>
               <% else %>
-                <p><%= user.tsusername %></p>
+                <% if @count == 1 %>
+                  <h3><%= user.tsusername %></h3>
+                <% elsif @count == 2 %>
+                  <h4><%= user.tsusername %></h4>
+                <% elsif @count == 3 %>
+                  <h5><%= user.tsusername %></h5>
+                <% else %>
+                  <p><%= user.tsusername %></p>
+                <% end %>
               <% end %>
           </div>
           <div class="col">
-              <p><%= user.points %></p>
+              <% if @count == 1 %>
+                <h3><%= user.points %></h3>
+              <% elsif @count == 2 %>
+                <h4><%= user.points %></h4>
+              <% elsif @count == 3 %>
+                <h5><%= user.points %></h5>
+              <% else %>
+                <p><%= user.points %></p>
+              <% end %>
           </div>
         </div>
         <% @count += 1 %>
