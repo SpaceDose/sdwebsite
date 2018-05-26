@@ -30,8 +30,11 @@
   --bg-color-dark: #992D19;
   --btn-color: #C49662;
   --font-color: #E6D9C9;
+}
 
-
+.dropdown-menu {
+  background-color: var(--light-bg-color);
+  padding-left: 10px;
 }
 
 .btn-outline-danger, {
@@ -64,7 +67,6 @@ body {
 }
 
 .navbar {
-
 }
 
 .stream-background {
@@ -83,6 +85,18 @@ body {
     color: white;
   }
 }
+
+#navbarDropdown {
+    border-left: 1px solid #FFFFFF;
+    margin-left: 10px;
+    padding-left: 18px;
+    color: white;
+
+    &:hover {
+      color: #E6D9C9;
+    }
+  }
+
 .navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
   color: white;
 

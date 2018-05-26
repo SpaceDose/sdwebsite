@@ -5,7 +5,9 @@ protect_from_forgery
   end
 
   def edit_profile
+  end
 
+  def inventory
   end
 
   def show_yourself
@@ -34,9 +36,14 @@ protect_from_forgery
 
   def save_uniqueid
     @new_unique_id = params[:uniqueid]
-    current_user.uniqueid = @new_unique_id
-    current_user.save
-    redirect_to profile_path
-  end
 
+    if User.find_by uniqueid: @new_unique_id
+      flash[:warning] = 'ID already taken! Do you already have an account?'
+      redirect_to edit_profile_path
+    else
+      current_user.uniqueid = @new_unique_id
+      current_user.save
+      redirect_to profile_path
+    end
+  end
 end

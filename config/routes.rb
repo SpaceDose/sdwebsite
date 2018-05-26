@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
     get 'profile', to:'profile#profile'
     get 'edit_profile', to:'profile#edit_profile'
+    get 'inventory', to:'profile#inventory'
     post 'show_yourself' => 'profile#show_yourself', as: :show_yourself
     post 'hide_yourself' => 'profile#hide_yourself', as: :hide_yourself
     post 'save_nickname' => 'profile#save_nickname', as: :save_nickname
