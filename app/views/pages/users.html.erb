@@ -1,5 +1,9 @@
 
 <div class="container" style="margin-bottom: 150px">
+
+<h1>Userlist for Admins:</h1>
+<br>
+
   <% if current_user.admin? %>
   <!-- Headder -->
   <div class="row">
@@ -8,6 +12,9 @@
     </div>
     <div class="col">
       <p>Nickname</p>
+    </div>
+    <div class="col">
+      <p>XP</p>
     </div>
     <div class="col">
       <p>POI</p>
@@ -44,6 +51,13 @@
           <div class="col">
             <% if @usr %>
               <p><%= @usr.points %></p>
+            <% else %>
+              <p>N/A</p>
+            <% end %>
+          </div>
+          <div class="col">
+            <% if @usr %>
+              <p><%= @usr.currency %></p>
             <% else %>
               <p>N/A</p>
             <% end %>
